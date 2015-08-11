@@ -10,9 +10,9 @@ New raffl
     <%= f.select :num_winners, ( 1..25) %>
   </div>
   <div class="form-group">
-    <%= f.label :contestants, 'Contestant names' %>
-    <%= text_area_tag :contestants, @contestants, {:cols => 40, :rows => 15} %>
-                <p class="note">Names should be separated with line breaks.</p>
+    <%= f.label :contestant_names, 'Contestant names' %>
+    <%= f.text_area :contestant_names, {:cols => 40, :rows => 15} %>
+    <p class="note">Names should be separated with line breaks.</p>
   </div>
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>

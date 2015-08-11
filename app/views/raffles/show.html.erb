@@ -1,6 +1,7 @@
 <h1><%= @raffle.title %></h1>
 
-
-  <% @contestants.each do |contestant| %>
-  <%= contestant.name %>
+<ul>
+  <% @raffle.contestants.each do |contestant| %>
+    <li><%= contestant.name %></li>
   <% end %>
+</ul>
