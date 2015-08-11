@@ -12,7 +12,7 @@ class RafflesController < ApplicationController
     @raffle = Raffle.new(raffle_params)
 
     if @raffle.save
-      render 'show'
+      redirect_to raffle_path(@raffle.id)
     else
       flash[:notice] = "Oops, something went wrong!"
       render 'new'
@@ -24,6 +24,7 @@ class RafflesController < ApplicationController
 
   def show
     @raffle = Raffle.find(params[:id])
+    @contestants = Contestant.where(raffle_id: @raffle.id)
   end
 
   private
