@@ -1,0 +1,16 @@
+<%= form_for @raffle do |f| %>
+  <div class="form-group">
+    <%= f.label :title, 'Raffle Name' %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= f.label :num_winners, 'Number of Winners' %>
+    <%= f.text_field :num_winners %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contestants, 'Contestant Names' %>
+    <%= text_area_tag :contestants, @contestants, {:cols => 70, :rows => 15} %>
+                <p class="note">Names should be separated with line breaks.</p>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
