@@ -20,7 +20,19 @@ class RafflesController < ApplicationController
 
   def show
     @raffle = Raffle.find(params[:id])
-    @contestants = Contestant.where(raffle_id: @raffle.id)
+    @winners = @raffle.contestants.sample(@raffle.num_winners)
+    @participations = @raffle.participations
+    @winners.each do |winner|
+      @participations.each do |participation|
+        if participation.contestant_id == winner.id
+          participation.winner = true
+        else
+          participation.winner = false
+        end
+        participation.save
+      end
+    end
+
   end
 
   private
