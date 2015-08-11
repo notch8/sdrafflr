@@ -1,6 +1,14 @@
 New raffl
 
 <%= form_for @raffle do |f| %>
+  <% if @raffle.errors.any? %>
+    <h2>There was a problem saving this record</h2>
+    <ul>
+      <% @raffle.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title %>

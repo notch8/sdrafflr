@@ -21,7 +21,6 @@ class RafflesController < ApplicationController
   def show
     @raffle = Raffle.find(params[:id])
     @contestants = Contestant.where(raffle_id: @raffle.id)
-    binding.pry
 
   end
 
