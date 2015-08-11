@@ -32,6 +32,7 @@ class RafflesController < ApplicationController
         participation.save
       end
     end
+
   end
 
   private
