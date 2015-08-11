@@ -1,7 +1,7 @@
 class Raffle < ActiveRecord::Base
-  validates :name, presence: true
+  validates :title, presence: true
   validates :num_winners, presence: true
 
   has_many :contestants
-  has_many :winners
+  accepts_nested_attributes_for :contestants
 end

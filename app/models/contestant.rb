@@ -3,5 +3,4 @@ class Contestant < ActiveRecord::Base
   validates :raffle_id, presence: true
 
   belongs_to :raffle
-  has_many :winners
 end
