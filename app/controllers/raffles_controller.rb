@@ -10,6 +10,7 @@ class RafflesController < ApplicationController
 
   def create
     @raffle = Raffle.new(raffle_params)
+
     if @raffle.save
       render 'show'
     else

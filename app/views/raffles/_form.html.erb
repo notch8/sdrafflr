@@ -8,8 +8,8 @@
     <%= f.text_field :num_winners %>
   </div>
   <div class="form-group">
-    <%= f.label :contestants, 'Contestant Names' %>
-    <%= text_area_tag :contestants, @contestants, {:cols => 70, :rows => 15} %>
+    <%= f.label :contestant_names, 'Contestant Names' %>
+    <%= f.text_area :contestant_names, {:cols => 70, :rows => 15} %>
                 <p class="note">Names should be separated with line breaks.</p>
   </div>
   <%= f.submit "Submit", class: "btn btn-primary" %>
