@@ -12,10 +12,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150811180107) do
 =======
 ActiveRecord::Schema.define(version: 20150811173824) do
 >>>>>>> e6bf2a7a414430b1ce5a2ef6f741bbc27e382ee9
+=======
+ActiveRecord::Schema.define(version: 20150811192615) do
+>>>>>>> 69529980f5656d25fe9886b8e5be2a1da14f9dd2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +29,14 @@ ActiveRecord::Schema.define(version: 20150811173824) do
     t.integer  "raffle_id"
     t.boolean  "winner"
     t.datetime "created_at"
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.integer  "contestant_id"
+    t.integer  "raffle_id"
+    t.boolean  "winner"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "raffles", force: :cascade do |t|
