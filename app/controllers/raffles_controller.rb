@@ -10,16 +10,12 @@ class RafflesController < ApplicationController
 
   def create
     @raffle = Raffle.new(raffle_params)
-
     if @raffle.save
-      render 'show'
+      redirect_to raffle_path(@raffle)
     else
       flash[:notice] = "Oops, something went wrong!"
       render 'new'
     end
-    @contestants = params[:contestants]
-    contestants = @contestants.split(/\W+/)
-    contestants.each {|c| @raffle.contestants << Contestant.new(:name => c, :raffle_id => @raffle.id)}
   end
 
   def show
@@ -28,6 +24,6 @@ class RafflesController < ApplicationController
 
   private
     def raffle_params
-       params.require(:raffle).permit(:title, :num_winners)
+       params.require(:raffle).permit(:title, :num_winners, :contestant_names)
     end
 end
