@@ -23,17 +23,8 @@ class Raffle < ActiveRecord::Base
   end
 
   def pick_winners
-    winners = self.contestants.sample(self.num_winners)
-    participations = self.participations
-    winners.each do |winner|
-      participations.each do |participation|
-        if participation.contestant_id == winner.id
-          participation.winner = true
-        else
-          participation.winner = false unless participation.winner == true
-        end
-        participation.save
-      end
-    end
+    winners = participations.sample(num_winners)
+    winners.each{|winner| winner.update_attribute :winner, true}
+    return winners
   end
 end

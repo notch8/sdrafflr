@@ -5,6 +5,11 @@
     <li><%= contestant.name %></li>
   <% end %>
 </ul>
+<ul>
+  <% @raffle.pick_winners.each do |winner| %>
+  <li><%= winner.contestant.name %></li>
+  <% end %>
+</ul>
   <div id="wheel">
     <canvas id="canvas" width="1000" height="600"></canvas>
   </div>
