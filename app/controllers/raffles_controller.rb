@@ -1,4 +1,5 @@
 require "pry"
+require "uri"
 class RafflesController < ApplicationController
   def index
     @raffles = Raffle.all
@@ -21,7 +22,6 @@ class RafflesController < ApplicationController
 
   def show
     @raffle = Raffle.find(params[:id])
-
 
   end
 
