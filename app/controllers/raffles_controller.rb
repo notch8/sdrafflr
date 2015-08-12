@@ -11,6 +11,7 @@ class RafflesController < ApplicationController
   def create
     @raffle = Raffle.new(raffle_params)
     if @raffle.save
+      @raffle.pick_winners
       redirect_to raffle_path(@raffle)
     else
       flash[:notice] = "Oops, something went wrong!"
@@ -20,19 +21,6 @@ class RafflesController < ApplicationController
 
   def show
     @raffle = Raffle.find(params[:id])
-
-    @winners = @raffle.contestants.sample(@raffle.num_winners)
-    @participations = @raffle.participations
-    @winners.each do |winner|
-      @participations.each do |participation|
-        if participation.contestant_id == winner.id
-          participation.winner = true
-        else
-          participation.winner = false unless participation.winner == true
-        end
-        participation.save
-      end
-    end
 
   end
 
