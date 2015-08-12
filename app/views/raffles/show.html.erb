@@ -8,6 +8,6 @@
 </ul>
 <ul>
   <% @raffle.pick_winners.each do |winner| %>
-  <li><%= winner.name %></li>
+  <li><%= winner.contestant.name %></li>
   <% end %>
 </ul>
