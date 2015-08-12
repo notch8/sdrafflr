@@ -28,7 +28,7 @@ class RafflesController < ApplicationController
         if participation.contestant_id == winner.id
           participation.winner = true
         else
-          participation.winner = false
+          participation.winner = false unless participation.winner == true
         end
         participation.save
       end
