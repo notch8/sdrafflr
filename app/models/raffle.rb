@@ -20,4 +20,8 @@ class Raffle < ActiveRecord::Base
   def contestant_names
     self.contestants.map(&:name).join("\n")
   end
+
+  def raffle_winners
+    winners = self.contestants.sample(self.num_winners)
+  end
 end
