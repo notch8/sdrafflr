@@ -7,7 +7,7 @@
   <% end %>
 </ul>
 <ul>
-  <% @winners.each do |winner| %>
+  <% @raffle.pick_winners.each do |winner| %>
   <li><%= winner.name %></li>
   <% end %>
 </ul>
