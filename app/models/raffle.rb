@@ -23,5 +23,15 @@ class Raffle < ActiveRecord::Base
 
   def raffle_winners
     winners = self.contestants.sample(self.num_winners)
+    winners.each do |winner|
+      self.participations.each do |participation|
+        if participation.contestant_id == winner.id
+          participation.winner = true
+        else
+          participation.winner = false unless  participation.winner = true
+        end
+        participation.save
+      end
+    end
   end
 end

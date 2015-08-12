@@ -1,7 +1,12 @@
-<h1><%= @raffle.title %></h1>
+<div class="container well well-lg">
+<div class="ruby-title">
+  <a href="/" class="navbar-brand"><img src="https://www.codementor.io/assets/tutorial_icon/ruby-on-rails.png"></a>
+  <div class="main-title">SD Raffler</div>
+</div>
 
-<ul>
-  <% @raffle.raffle_winners.each do |winner| %>
-  <li><%= winner.name %></li>
-  <% end %>
-</ul>
+<div id="wheel" class="container-fluid">
+  <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>'></canvas>
+</div>
+
+<div id="counter"></div>
+</div>
