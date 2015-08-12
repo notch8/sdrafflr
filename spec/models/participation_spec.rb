@@ -14,5 +14,4 @@ describe Participation, 'validation' do
 
   it { should belong_to(:raffle) }
 
-
 end
