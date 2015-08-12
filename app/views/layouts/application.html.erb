@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sdrafflr</title>
+  <title>SD-Rafflr</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">SD RAFFLER</a>
+    </div>
+  </nav>
 <%= yield %>
 
 </body>

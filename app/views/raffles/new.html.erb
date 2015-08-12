@@ -1,18 +1,6 @@
-New raffl
 
-<%= form_for @raffle do |f| %>
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="form-group">
-    <%= f.label :num_winners, 'Number of winners' %>
-    <%= f.select :num_winners, ( 1..25) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :contestant_names, 'Contestant names' %>
-    <%= f.text_area :contestant_names, {:cols => 40, :rows => 15} %>
-    <p class="note">Names should be separated with line breaks.</p>
-  </div>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
-<% end %>
+<div class="col-sm-2">
+</div>
+<div class="container col-sm-8 well well-sm">
+  <%= render('form') %>
+</div>
