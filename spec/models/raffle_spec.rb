@@ -13,4 +13,10 @@ describe Raffle, 'validation' do
   it "is invalid without a num_winners" do
     FactoryGirl.build(:raffle, num_winners: nil).should_not be_valid
   end
+
+  it { should have_many(:participations) }
+
+  it { should have_many(:contestants) }
+
+
 end

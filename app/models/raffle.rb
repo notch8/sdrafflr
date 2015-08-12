@@ -1,5 +1,5 @@
 class Raffle < ActiveRecord::Base
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
   validates :num_winners, presence: true
 
   has_many :participations
