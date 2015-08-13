@@ -159,48 +159,48 @@
 		draw : function() {
 			wheel.clear();
 			wheel.drawWheel();
-			// wheel.drawNeedle();
+			wheel.drawNeedle();
 		},
 
 		clear : function() {
 			wheel.canvasContext.clearRect(0, 0, 1000, 800);
 		},
 
-		// drawNeedle : function() {
-		// 	var ctx = wheel.canvasContext,
-    //             centerX = wheel.centerX,
-    //             centerY = wheel.centerY,
-    //             size = wheel.size,
-    //             i,
-    //             centerSize = centerX + size,
-    //             len = wheel.segments.length,
-    //             winner;
-    //
-		// 	ctx.lineWidth = 2;
-		// 	ctx.strokeStyle = blackHex;
-		// 	ctx.fillStyle = whiteHex;
-    //
-		// 	ctx.beginPath();
-    //
-		// 	ctx.moveTo(centerSize - 10, centerY);
-		// 	ctx.lineTo(centerSize + 10, centerY - 10);
-		// 	ctx.lineTo(centerSize + 10, centerY + 10);
-		// 	ctx.closePath();
-    //
-		// 	ctx.stroke();
-		// 	ctx.fill();
-    //
-		// 	// Which segment is being pointed to?
-		// 	i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
-    //
-		// 	// Now draw the winning name
-		// 	ctx.textAlign = "left";
-		// 	ctx.textBaseline = "middle";
-		// 	ctx.fillStyle = blackHex;
-		// 	ctx.font = "2em Arial";
-    //         winner = wheel.segments[i] || 'Choose at least 1 Contestant';
-		// 	ctx.fillText(winner, centerSize + 20, centerY);
-		// },
+		drawNeedle : function() {
+			var ctx = wheel.canvasContext,
+                centerX = wheel.centerX,
+                centerY = wheel.centerY,
+                size = wheel.size,
+                i,
+                centerSize = centerX + size,
+                len = wheel.segments.length,
+                winner;
+
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = blackHex;
+			ctx.fillStyle = whiteHex;
+
+			ctx.beginPath();
+
+			ctx.moveTo(centerSize - 10, centerY);
+			ctx.lineTo(centerSize + 10, centerY - 10);
+			ctx.lineTo(centerSize + 10, centerY + 10);
+			ctx.closePath();
+
+			ctx.stroke();
+			ctx.fill();
+
+			// Which segment is being pointed to?
+			i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
+
+			// Now draw the winning name
+			ctx.textAlign = "left";
+			ctx.textBaseline = "middle";
+			ctx.fillStyle = blackHex;
+			ctx.font = "2em Arial";
+            winner = wheel.segments[i] || 'Choose at least 1 Contestant';
+			ctx.fillText(winner, centerSize + 20, centerY);
+		},
 
 		drawSegment : function(key, lastAngle, angle) {
 			var ctx = wheel.canvasContext,
@@ -250,7 +250,7 @@
 			ctx.lineWidth    = 1;
 			ctx.strokeStyle  = blackHex;
 			ctx.textBaseline = "middle";
-			ctx.textAlign    = "";
+			ctx.textAlign    = "right";
 			ctx.font         = "1em Arial";
 
 			for (i = 1; i <= len; i++) {

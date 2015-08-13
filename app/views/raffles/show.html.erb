@@ -5,21 +5,16 @@
 </div>
 
 <div id="wheel" class="container-fluid">
-  <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>'></canvas>
+  <canvas id="wheel-canvas" width="800" height="600" data-contestants='<%= @raffle.contestant_names %>'></canvas>
+
+  <div id="counter">
+
+  <ul>
+    <% @raffle.pick_winners.each do |winner| %>
+    <li><%= winner.contestant.name %></li>
+    <% end %>
+  </ul>
+  </div>
 </div>
 
-<div id="counter"></div>
 </div>
-<ul>
-  <% @raffle.contestants.each do |contestant| %>
-    <li><%= contestant.name %></li>
-  <% end %>
-</ul>
-<ul>
-  <% @raffle.pick_winners.each do |winner| %>
-  <li><%= winner.contestant.name %></li>
-  <% end %>
-</ul>
-  <div id="wheel">
-    <canvas id="canvas" width="1000" height="600"></canvas>
-  </div>
