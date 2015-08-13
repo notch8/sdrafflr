@@ -1,34 +1,15 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap-sprockets
-//= require wheel
-//= require_tree .
-
 (function ($){
-  var contestants = ["enrique", "leon", "allie", "ethan"]
-    // Helpers
-    var blackHex = '#333',
-        whiteHex = '#fff',
-        shuffle = function(o) {
-            for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-                ;
-            return o;
-        },
-        halfPI = Math.PI / 2,
-        doublePI = Math.PI * 2;
+  var contestants = [];
+  // Helpers
+  var blackHex = '#333',
+      whiteHex = '#fff',
+      shuffle = function(o) {
+          for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+              ;
+          return o;
+      },
+      halfPI = Math.PI / 2,
+      doublePI = Math.PI * 2;
 
 	String.prototype.hashCode = function(){
 		// See http://www.cse.yorku.ca/~oz/hash.html
@@ -49,7 +30,7 @@
 // WHEEL!
 	var wheel = {
 		timerHandle : 0,
-		timerDelay : 33,
+		timerDelay : 23,
 
 		angleCurrent : 0,
 		angleDelta : 0,
@@ -67,7 +48,7 @@
 
 		maxSpeed : Math.PI / 16,
 
-		upTime : 1000, // How long to spin up for (in ms)
+		upTime : 2000, // How long to spin up for (in ms)
 		downTime : 5000, // How long to slow down for (in ms)
 
 		spinStart : 0,
@@ -145,7 +126,7 @@
 
 
 		initCanvas : function() {
-			var canvas = $('#canvas')[0];
+			var canvas = $('#wheel-canvas')[0];
 			canvas.addEventListener("click", wheel.spin, false);
 			wheel.canvasContext = canvas.getContext("2d");
 		},
@@ -178,48 +159,48 @@
 		draw : function() {
 			wheel.clear();
 			wheel.drawWheel();
-			wheel.drawNeedle();
+			// wheel.drawNeedle();
 		},
 
 		clear : function() {
 			wheel.canvasContext.clearRect(0, 0, 1000, 800);
 		},
 
-		drawNeedle : function() {
-			var ctx = wheel.canvasContext,
-                centerX = wheel.centerX,
-                centerY = wheel.centerY,
-                size = wheel.size,
-                i,
-                centerSize = centerX + size,
-                len = wheel.segments.length,
-                winner;
-
-			ctx.lineWidth = 2;
-			ctx.strokeStyle = blackHex;
-			ctx.fillStyle = whiteHex;
-
-			ctx.beginPath();
-
-			ctx.moveTo(centerSize - 10, centerY);
-			ctx.lineTo(centerSize + 10, centerY - 10);
-			ctx.lineTo(centerSize + 10, centerY + 10);
-			ctx.closePath();
-
-			ctx.stroke();
-			ctx.fill();
-
-			// Which segment is being pointed to?
-			i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
-
-			// Now draw the winning name
-			ctx.textAlign = "left";
-			ctx.textBaseline = "middle";
-			ctx.fillStyle = blackHex;
-			ctx.font = "2em Arial";
-            winner = wheel.segments[i] || 'Choose at least 1 Venue';
-			ctx.fillText(winner, centerSize + 20, centerY);
-		},
+		// drawNeedle : function() {
+		// 	var ctx = wheel.canvasContext,
+    //             centerX = wheel.centerX,
+    //             centerY = wheel.centerY,
+    //             size = wheel.size,
+    //             i,
+    //             centerSize = centerX + size,
+    //             len = wheel.segments.length,
+    //             winner;
+    //
+		// 	ctx.lineWidth = 2;
+		// 	ctx.strokeStyle = blackHex;
+		// 	ctx.fillStyle = whiteHex;
+    //
+		// 	ctx.beginPath();
+    //
+		// 	ctx.moveTo(centerSize - 10, centerY);
+		// 	ctx.lineTo(centerSize + 10, centerY - 10);
+		// 	ctx.lineTo(centerSize + 10, centerY + 10);
+		// 	ctx.closePath();
+    //
+		// 	ctx.stroke();
+		// 	ctx.fill();
+    //
+		// 	// Which segment is being pointed to?
+		// 	i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
+    //
+		// 	// Now draw the winning name
+		// 	ctx.textAlign = "left";
+		// 	ctx.textBaseline = "middle";
+		// 	ctx.fillStyle = blackHex;
+		// 	ctx.font = "2em Arial";
+    //         winner = wheel.segments[i] || 'Choose at least 1 Contestant';
+		// 	ctx.fillText(winner, centerSize + 20, centerY);
+		// },
 
 		drawSegment : function(key, lastAngle, angle) {
 			var ctx = wheel.canvasContext,
@@ -269,7 +250,7 @@
 			ctx.lineWidth    = 1;
 			ctx.strokeStyle  = blackHex;
 			ctx.textBaseline = "middle";
-			ctx.textAlign    = "right";
+			ctx.textAlign    = "";
 			ctx.font         = "1em Arial";
 
 			for (i = 1; i <= len; i++) {
@@ -298,14 +279,18 @@
 			ctx.stroke();
 		}
 	};
+
   $(function() {
-    wheel.init();
+    if($('#wheel-canvas').size() > 0) {
+      var contestants = $('#wheel-canvas').data('contestants').split('\n');
 
-		$.each(contestants, function(key, contestant) {
-			wheel.segments.push( contestant );
-		});
+      wheel.init();
 
-		wheel.update();
+      $.each(contestants, function(key, contestant) {
+        wheel.segments.push( contestant );
+      });
 
+      wheel.update();
+    }
 	});
 }(jQuery));

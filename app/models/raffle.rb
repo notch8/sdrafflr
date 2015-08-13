@@ -7,7 +7,6 @@ class Raffle < ActiveRecord::Base
   accepts_nested_attributes_for :participations
   accepts_nested_attributes_for :contestants
 
-
   # Takes a string of contestant names, one per line, makes associations
   #"Rob\nAllie\nEthan"
   def contestant_names=(value)
