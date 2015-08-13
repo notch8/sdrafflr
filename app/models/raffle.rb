@@ -1,5 +1,5 @@
 class Raffle < ActiveRecord::Base
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
   validates :num_winners, presence: true
 
   has_many :participations
@@ -21,7 +21,9 @@ class Raffle < ActiveRecord::Base
     self.contestants.map(&:name).join("\n")
   end
 
-  def raffle_winners
-    winners = self.contestants.sample(self.num_winners)
+  def pick_winners
+    winners = participations.sample(num_winners)
+    winners.each{|winner| winner.update_attribute :winner, true}
+    return winners
   end
 end

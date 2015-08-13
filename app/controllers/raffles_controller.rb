@@ -1,4 +1,5 @@
 require "pry"
+require "uri"
 class RafflesController < ApplicationController
   def index
     @raffles = Raffle.all
@@ -11,6 +12,7 @@ class RafflesController < ApplicationController
   def create
     @raffle = Raffle.new(raffle_params)
     if @raffle.save
+      @raffle.pick_winners
       redirect_to raffle_path(@raffle)
     else
       flash[:notice] = "Oops, something went wrong!"

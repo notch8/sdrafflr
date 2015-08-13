@@ -1,16 +1,36 @@
 <%= form_for @raffle do |f| %>
+   <% if @raffle.errors.any? %>
+     <h2>There was a problem saving this record</h2>
+     <ul>
+       <% @raffle.errors.full_messages.each do |error| %>
+         <li><%= error %></li>
+       <% end %>
+     </ul>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-3">
   <div class="form-group">
     <%= f.label :title, 'Raffle Name' %>
-    <%= f.text_field :title, class:'form-control' %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
   <div class="form-group">
     <%= f.label :num_winners, 'Number of Winners' %>
-    <%= f.text_field :num_winners, class:'form-control' %>
+    <%= f.text_field :num_winners, class: 'form-control col-sm-2' %>
   </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
   <div class="form-group">
     <%= f.label :contestant_names, 'Contestant Names' %>
-    <%= f.text_area :contestant_names, cols:70, rows:15, class:'form-control' %>
+    <%= f.text_area :contestant_names, cols: 70, rows: 15, class: 'form-control' %>
                 <p class="note">Names should be separated with line breaks.</p>
   </div>
+</div>
+</div>
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
