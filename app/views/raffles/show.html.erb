@@ -5,7 +5,7 @@
 </div>
 
 <div id="wheel" class="container-fluid">
-  <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>'></canvas>
+  <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>' data-winners=''></canvas>
 </div>
 
 <div id="counter"></div>
@@ -20,6 +20,3 @@
   <li><%= winner.contestant.name %></li>
   <% end %>
 </ul>
-  <div id="wheel">
-    <canvas id="canvas" width="1000" height="600"></canvas>
-  </div>
