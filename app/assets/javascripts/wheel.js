@@ -1,7 +1,7 @@
 (function ($){
   var contestants = { names : []};
   var winners = { names : []};
-    var winner;
+  var winner;
 
 
 
@@ -45,7 +45,7 @@
 		canvasContext : null,
 
 
-        colors : [ '#FE2E2E', '#DF0101', '#8A0808', '#B40431' ],
+    colors : [ '#FE2E2E', '#DF0101', '#8A0808', '#B40431' ],
 
 		segments : [],
 
@@ -59,7 +59,7 @@
 		spinStart : 0,
 
 		frames : 0,
-        progress : 0,
+    progress : 0,
 
 		centerX : 300,
 		centerY : 300,
@@ -75,8 +75,8 @@
 			}
 		},
 		onTimerTick : function() {
-            var duration = (new Date().getTime() - wheel.spinStart),
-                finished = false;
+      var duration = (new Date().getTime() - wheel.spinStart),
+          finished = false;
 
 			wheel.frames++;
 			wheel.draw();
@@ -128,6 +128,7 @@
             wheel.progress = 0;
             wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
             } else {
+              $('#spins').html("0");
               wheel.timerHandle = 0;
             }
           });
@@ -190,7 +191,8 @@
 		draw : function() {
 			wheel.clear();
 			wheel.drawWheel();
-            wheel.drawNeedle();
+      wheel.drawNeedle();
+      $('#spins').html(winners.names.length);
 		},
 
 		clear : function() {
