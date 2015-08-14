@@ -70,7 +70,7 @@
 				wheel.spinStart = new Date().getTime();
 				wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
 				wheel.frames = 0;
-                wheel.progress = 0;
+        wheel.progress = 0;
 				wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
 			}
 		},
@@ -122,6 +122,10 @@
         $('#winners').append('<li style="display:none" id="' + winner + '">' + winner + '</li>')
         $("#" + winner).fadeIn(3000, function() {
           if (winners.names.length > 0) {
+            wheel.spinStart = new Date().getTime();
+            wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
+            wheel.frames = 0;
+            wheel.progress = 0;
             wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
             } else {
               wheel.timerHandle = 0;
