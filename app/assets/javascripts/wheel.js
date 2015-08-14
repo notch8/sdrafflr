@@ -1,6 +1,6 @@
 (function ($){
-  var contestants = { name : []};
-  var winners = { name : []};
+  var contestants = { names : []};
+  var winners = { names : []};
     var winner;
 
 
@@ -89,14 +89,22 @@
 				wheel.progress = duration / wheel.downTime;
 				wheel.angleDelta = wheel.maxSpeed
 						* Math.sin(wheel.progress * halfPI + halfPI);
-                if(jQuery.inArray(winner, winners) != -1) {
+                if(jQuery.inArray(winner, winners.names) != -1) {
                     console.log("is in array");
 
                 } else {
                     console.log("is NOT in array");
                 }
-                if (wheel.progress >= 1 && jQuery.inArray(winner, winners.name) !== -1){
+                if (wheel.progress >= 1 && jQuery.inArray(winner, winners.names) !== -1){
                     finished = true;
+
+                    //remove winner from winners array
+                    console.log(winner);
+                    console.log(winners.names);
+                    var index = winners.names.indexOf(winner);
+                    winners.names.splice(index, 1);
+                    console.log(winners.names);
+
                 } else {
                     wheel.progress = 0;
                     wheel.angleDelta = 0.05;
@@ -304,11 +312,11 @@
       });
 
         $.each(contestants2, function(key, contestant) {
-            contestants.name.push( contestant );
+            contestants.names.push( contestant );
         });
 
         $.each(winners2, function(key, winner) {
-            winners.name.push( winner );
+            winners.names.push( winner );
         });
 
 
