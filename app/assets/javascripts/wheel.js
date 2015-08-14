@@ -109,8 +109,6 @@
                     wheel.progress = 0;
                     wheel.angleDelta = 0.05;
                 }
-
-
 			}
 
 			wheel.angleCurrent += wheel.angleDelta;
@@ -120,11 +118,17 @@
             }
 			if (finished) {
 				clearInterval(wheel.timerHandle);
-				wheel.timerHandle = 0;
-				wheel.angleDelta = 0;
-
-                if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
-			}
+        wheel.angleDelta = 0;
+        $('#winners').append('<li style="display:none" id="' + winner + '">' + winner + '</li>')
+        $("#" + winner).fadeIn(3000, function() {
+          if (winners.names.length > 0) {
+            wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
+            } else {
+              wheel.timerHandle = 0;
+            }
+          });
+        if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
+			};
 
 			/*
 			// Display RPM
