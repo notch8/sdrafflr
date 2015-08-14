@@ -1,7 +1,9 @@
 (function ($){
-  var contestants = [];
-  var winners = [];
+  var contestants = { name : []};
+  var winners = { name : []};
     var winner;
+
+
 
   // Helpers
   var blackHex = '#333',
@@ -43,7 +45,7 @@
 		canvasContext : null,
 
 
-    colors : [ '#FE2E2E', '#DF0101', '#8A0808', '#B40431' ],
+        colors : [ '#FE2E2E', '#DF0101', '#8A0808', '#B40431' ],
 
 		segments : [],
 
@@ -72,7 +74,6 @@
 				wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
 			}
 		},
-
 		onTimerTick : function() {
             var duration = (new Date().getTime() - wheel.spinStart),
                 finished = false;
@@ -88,8 +89,13 @@
 				wheel.progress = duration / wheel.downTime;
 				wheel.angleDelta = wheel.maxSpeed
 						* Math.sin(wheel.progress * halfPI + halfPI);
+                if(jQuery.inArray(winner, winners) != -1) {
+                    console.log("is in array");
 
-                if (wheel.progress >= 1 && winner === 'Allie'){
+                } else {
+                    console.log("is NOT in array");
+                }
+                if (wheel.progress >= 1 && jQuery.inArray(winner, winners.name) !== -1){
                     finished = true;
                 } else {
                     wheel.progress = 0;
@@ -289,15 +295,25 @@
 
   $(function() {
     if($('#wheel-canvas').size() > 0) {
-      var contestants = $('#wheel-canvas').data('contestants').split('\n');
-
+      var contestants2 = $('#wheel-canvas').data('contestants').split('\n');
+      var winners2 = $('#wheel-canvas').data('winners');
       wheel.init();
 
-      $.each(contestants, function(key, contestant) {
+      $.each(contestants2, function(key, contestant) {
         wheel.segments.push( contestant );
       });
 
-      wheel.update();
+        $.each(contestants2, function(key, contestant) {
+            contestants.name.push( contestant );
+        });
+
+        $.each(winners2, function(key, winner) {
+            winners.name.push( winner );
+        });
+
+
+
+        wheel.update();
     }
 	});
 }(jQuery));
