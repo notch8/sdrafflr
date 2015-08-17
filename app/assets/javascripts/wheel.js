@@ -119,8 +119,8 @@
 			if (finished) {
 				clearInterval(wheel.timerHandle);
         wheel.angleDelta = 0;
-        $('#winners').append('<li style="display:none" id="' + winner + '">' + winner + '</li>')
-        $("#" + winner).fadeIn(3000, function() {
+        $('#winners').append('<li style="display:none" id="' + winner.replace(/[^A-Z0-9]+/ig, "_") + '">' + winner + '</li>')
+        $("#" + winner.replace(/[^A-Z0-9]+/ig, "_")).fadeIn(3000, function() {
           if (winners.names.length > 0) {
             wheel.spinStart = new Date().getTime();
             wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
