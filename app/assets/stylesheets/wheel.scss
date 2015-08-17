@@ -22,3 +22,46 @@ label,
 #filterToggle { display:inline-block; }
 #filterToggle { background: #fefefe; box-shadow: 0 1px 2px #efefef; }
 #filterToggle { border-radius: 0 0 3px 3px; cursor: pointer; margin-left: .5em; margin-top:-1px; padding:.5em; }
+
+#counter {
+  padding-left: 180px;
+  font-size: 2.2em;
+}
+
+.winners {
+  border-radius: 7px;
+  border: 1px solid rgb(224, 224, 224);
+  padding: 5px 0 5px 0;
+  height: 600px;
+  background-color: rgba(217, 35, 15, 0.81);
+  border: 1px solid #7D0303;
+
+}
+
+.winners h3 {
+  font-size: 3em;
+  text-align: center;
+  color: #333;
+}
+
+#winners {
+  list-style-type: none;
+  font-size: 1.5em;
+  padding-left: 0;
+  text-align: center;
+}
+
+#winners li {
+  border-radius: 7px;
+  border: 1px solid #e0e0e0;
+  background-color: #F4F4F4;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px #843026;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#page {
+margin-left: 25px;
+margin-right: 25px;
+}

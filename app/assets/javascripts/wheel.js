@@ -107,7 +107,7 @@
 
                 } else {
                     wheel.progress = 0;
-                    wheel.angleDelta = 0.05;
+                    wheel.angleDelta = 0.1;
                 }
 			}
 
@@ -228,8 +228,8 @@
 		 	ctx.textAlign = "left";
 		 	ctx.textBaseline = "middle";
 		 	ctx.fillStyle = blackHex;
-		 	ctx.font = "2em Arial";
-             winner = wheel.segments[i] || 'Choose at least 1 Contestant';
+		 	ctx.font = "1.5em Arial";
+      winner = wheel.segments[i];
 		 	ctx.fillText(winner, centerSize + 20, centerY);
 		 },
 
