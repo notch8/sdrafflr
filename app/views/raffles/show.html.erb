@@ -1,25 +1,34 @@
 <div class="container well well-lg">
-<div class="ruby-title">
-  <a href="/" class="navbar-brand"><img src="https://www.codementor.io/assets/tutorial_icon/ruby-on-rails.png"></a>
-  <div class="main-title">SD Raffler</div>
+  <div class="ruby-title">
+    <a href="/" class="navbar-brand"><img src="https://www.codementor.io/assets/tutorial_icon/ruby-on-rails.png"></a>
+    <div class="main-title">SD Raffler</div>
+  </div>
+
+  <div id="wheel" class="container-fluid">
+    <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>' data-winners='<%= @winners %>'></canvas>
+  </div>
+
+  <div id="counter">Spins remaining: <span id="spins"></span></div>
+  
+  <div id="winner-div" class="container-fluid">
+    <h3>Winners</h3>
+    <ul id='winners'>
+    </ul>
+  </div>
+
+
 </div>
 
-<div id="wheel" class="container-fluid">
-  <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>'></canvas>
-</div>
 
-<div id="counter"></div>
-</div>
-<ul>
+
+
+<!-- <ul>
   <% @raffle.contestants.each do |contestant| %>
     <li><%= contestant.name %></li>
   <% end %>
 </ul>
 <ul>
-  <% @raffle.pick_winners.each do |winner| %>
-  <li><%= winner.contestant.name %></li>
+  <% @winners.each do |w| %>
+      <li><%= w %></li>
   <% end %>
-</ul>
-  <div id="wheel">
-    <canvas id="canvas" width="1000" height="600"></canvas>
-  </div>
+</ul> -->
