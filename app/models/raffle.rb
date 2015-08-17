@@ -14,7 +14,6 @@ class Raffle < ActiveRecord::Base
 
 
 
-
   # Takes a string of contestant names, one per line, makes associations
   #"Rob\nAllie\nEthan"
   def contestant_names=(value)

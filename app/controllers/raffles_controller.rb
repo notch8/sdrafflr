@@ -22,7 +22,7 @@ class RafflesController < ApplicationController
 
   def show
     @raffle = Raffle.find(params[:id])
-
+    @winners = @raffle.participations.where(winner: true).map {|p| p.contestant.name}.flatten
   end
 
   private
