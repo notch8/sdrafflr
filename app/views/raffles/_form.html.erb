@@ -1,12 +1,5 @@
 <%= form_for @raffle do |f| %>
-   <% if @raffle.errors.any? %>
-     <h2>There was a problem saving this record</h2>
-     <ul>
-       <% @raffle.errors.full_messages.each do |error| %>
-         <li><%= error %></li>
-       <% end %>
-     </ul>
-  <% end %>
+  <%= render 'shared/error_messages' %>
   <div class="row">
     <div class="col-sm-3">
   <div class="form-group">
@@ -28,7 +21,7 @@
   <div class="form-group">
     <%= f.label :contestant_names, 'Contestant Names' %>
     <%= f.text_area :contestant_names, cols: 70, rows: 15, class: 'form-control' %>
-                <p class="note">Names should be separated with line breaks.</p>
+    <p class="note">Names should be separated with line breaks.</p>
   </div>
 </div>
 </div>
