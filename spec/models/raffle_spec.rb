@@ -14,6 +14,15 @@ describe Raffle, 'validation' do
     FactoryGirl.build(:raffle, num_winners: nil).should_not be_valid
   end
 
+  it "is invalid if num_winners is not an integer" do
+    FactoryGirl.build(:raffle, num_winners: "one").should_not be_valid
+  end
+
+  it "is valid if num_winners is an integer" do
+    FactoryGirl.build(:raffle, num_winners: 1).should be_valid
+  end
+
+
   it { should have_many(:participations) }
 
   it { should have_many(:contestants) }
