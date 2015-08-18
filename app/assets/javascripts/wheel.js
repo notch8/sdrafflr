@@ -70,45 +70,7 @@
 		},
 
 		onTimerTick : function() {
-            var duration = (new Date().getTime() - wheel.spinStart),
-                progress = 0,
-                finished = false;
-
-			wheel.frames++;
-			wheel.draw();
-
-			if (duration < wheel.upTime) {
-				progress = duration / wheel.upTime;
-				wheel.angleDelta = wheel.maxSpeed
-						* Math.sin(progress * halfPI);
-			} else {
-				progress = duration / wheel.downTime;
-				wheel.angleDelta = wheel.maxSpeed
-						* Math.sin(progress * halfPI + halfPI);
-                if (progress >= 1){
-                    finished = true;
-                }
-			}
-
-			wheel.angleCurrent += wheel.angleDelta;
-            while (wheel.angleCurrent >= doublePI){
-				// Keep the angle in a reasonable range
-				wheel.angleCurrent -= doublePI;
-            }
-			if (finished) {
-				clearInterval(wheel.timerHandle);
-				wheel.timerHandle = 0;
-				wheel.angleDelta = 0;
-
-                if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
-			}
-
-			/*
-			// Display RPM
-			var rpm = (wheel.angleDelta * (1000 / wheel.timerDelay) * 60) / (Math.PI * 2);
-			$("#counter").html( Math.round(rpm) + " RPM" );
-			 */
-		},
+            
 
 		init : function(optionList) {
 			try {
