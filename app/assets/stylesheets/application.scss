@@ -3,3 +3,37 @@
 @import "bootstrap";
 @import "bootswatch/simplex/bootswatch";
 @import "wheel";
+
+body {
+  background-color: #D8D8D8;
+}
+
+.heading-winners h1 {
+  font-family: Orbitron;
+  margin-left: 20px;
+}
+
+.row {
+  width: 1140px;
+  margin: 0px;
+  height: 100%;
+}
+
+.col-md-4 {
+  overflow: auto;
+  font-size: 17px;
+  font-weight: bold;
+  width: 260px;
+  height: 400px;
+  padding-left: 20px;
+  background: white;
+  box-shadow: 5px 5px 9px #888888;
+  border-color: #a91b0c;
+	border-radius: 5px;
+	margin-bottom: 40px;
+  margin-left: 20px;
+    h2 {
+      font-family: Orbitron;
+      margin-bottom: 0px;
+    }
+}

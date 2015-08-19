@@ -33,4 +33,9 @@ class Raffle < ActiveRecord::Base
     winners.each{|winner| winner.update_attribute :winner, true}
     return winners
   end
+  
+  def winners
+   winners = self.participations.select{ |participant| participant.winner }
+   winners.map{ |winner| winner.contestant }
+ end
 end
