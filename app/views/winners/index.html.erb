@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container well well-sm">
   <div class="heading-winners">
     <h1>Previous Winners</h1>
   </div>
   <h2><% @raffle.each_slice(1) do |raffles| %></h2>
-  <div class="row">
+  <div class="row fullpage-row">
 
 
 
       <% raffles.each do |raffle| %>
-    <div class="col-md-4">
-         <h2><%= raffle.title %> Winners</h2>
+    <div class="winner-card col-md-4">
+         <h2><%= raffle.title %></h2>
          <h4><%= raffle.created_at.strftime("%d %b. %Y") =%></h4>
            <% if raffle.winners %>
              <ol>

@@ -4,22 +4,26 @@
 @import "bootswatch/simplex/bootswatch";
 @import "wheel";
 
+
 body {
-  background-color: #D8D8D8;
+  font-family: Orbitron;
 }
 
+h1 {
+  font-family: Orbitron;
+}
 .heading-winners h1 {
   font-family: Orbitron;
   margin-left: 20px;
 }
 
-.row {
+.fullpage-row {
   width: 1140px;
   margin: 0px;
   height: 100%;
 }
 
-.col-md-4 {
+.winner-card {
   overflow: auto;
   font-size: 17px;
   font-weight: bold;
