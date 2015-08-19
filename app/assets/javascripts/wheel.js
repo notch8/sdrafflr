@@ -1,36 +1,20 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap-sprockets
-//= require wheel
-//= require_tree .
-
-
-
 (function ($){
-  var contestants = ["enrique", "leon", "allie", "ethan"]
-    // Helpers
-    var blackHex = '#333',
-        whiteHex = '#fff',
-        shuffle = function(o) {
-            for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-                ;
-            return o;
-        },
-        halfPI = Math.PI / 2,
-        doublePI = Math.PI * 2;
+  var contestants = { names : []};
+  var winners = { names : []};
+  var winner;
+
+
+
+  // Helpers
+  var blackHex = '#333',
+      whiteHex = '#fff',
+      shuffle = function(o) {
+          for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+              ;
+          return o;
+      },
+      halfPI = Math.PI / 2,
+      doublePI = Math.PI * 2;
 
 	String.prototype.hashCode = function(){
 		// See http://www.cse.yorku.ca/~oz/hash.html
@@ -51,7 +35,7 @@
 // WHEEL!
 	var wheel = {
 		timerHandle : 0,
-		timerDelay : 33,
+		timerDelay : 23,
 
 		angleCurrent : 0,
 		angleDelta : 0,
@@ -69,12 +53,13 @@
 
 		maxSpeed : Math.PI / 16,
 
-		upTime : 1000, // How long to spin up for (in ms)
-		downTime : 5000, // How long to slow down for (in ms)
+		upTime : 5000, // How long to spin up for (in ms)
+		downTime : 10000, // How long to slow down for (in ms)
 
 		spinStart : 0,
 
 		frames : 0,
+    progress : 0,
 
 		centerX : 300,
 		centerY : 300,
@@ -85,29 +70,45 @@
 				wheel.spinStart = new Date().getTime();
 				wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
 				wheel.frames = 0;
-
+        wheel.progress = 0;
 				wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
 			}
 		},
-
 		onTimerTick : function() {
-            var duration = (new Date().getTime() - wheel.spinStart),
-                progress = 0,
-                finished = false;
+
+      var duration = (new Date().getTime() - wheel.spinStart),
+          finished = false;
 
 			wheel.frames++;
 			wheel.draw();
 
 			if (duration < wheel.upTime) {
-				progress = duration / wheel.upTime;
+				wheel.progress = duration / wheel.upTime;
 				wheel.angleDelta = wheel.maxSpeed
-						* Math.sin(progress * halfPI);
+						* Math.sin(wheel.progress * halfPI);
 			} else {
-				progress = duration / wheel.downTime;
+				wheel.progress = duration / wheel.downTime;
 				wheel.angleDelta = wheel.maxSpeed
-						* Math.sin(progress * halfPI + halfPI);
-                if (progress >= 1){
+						* Math.sin(wheel.progress * halfPI + halfPI);
+                if(jQuery.inArray(winner, winners.names) != -1) {
+                    console.log("is in array");
+
+                } else {
+                    console.log("is NOT in array");
+                }
+                if (wheel.progress >= 1 && jQuery.inArray(winner, winners.names) !== -1){
                     finished = true;
+
+                    //remove winner from winners array
+                    console.log(winner);
+                    console.log(winners.names);
+                    var index = winners.names.indexOf(winner);
+                    winners.names.splice(index, 1);
+                    console.log(winners.names);
+
+                } else {
+                    wheel.progress = 0;
+                    wheel.angleDelta = 0.1;
                 }
 			}
 
@@ -118,11 +119,22 @@
             }
 			if (finished) {
 				clearInterval(wheel.timerHandle);
-				wheel.timerHandle = 0;
-				wheel.angleDelta = 0;
-
-                if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
-			}
+        wheel.angleDelta = 0;
+        $('#winners').append('<li style="display:none" id="' + winner.replace(/[^A-Z0-9]+/ig, "_") + '">' + winner + '</li>')
+        $("#" + winner.replace(/[^A-Z0-9]+/ig, "_")).fadeIn(3000, function() {
+          if (winners.names.length > 0) {
+            wheel.spinStart = new Date().getTime();
+            wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
+            wheel.frames = 0;
+            wheel.progress = 0;
+            wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
+            } else {
+              $('#spins').html("0");
+              wheel.timerHandle = 0;
+            }
+          });
+        if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
+			};
 
 			/*
 			// Display RPM
@@ -130,6 +142,7 @@
 			$("#counter").html( Math.round(rpm) + " RPM" );
 			 */
 		},
+
 
 		init : function(optionList) {
 			try {
@@ -147,7 +160,7 @@
 
 
 		initCanvas : function() {
-			var canvas = $('#canvas')[0];
+			var canvas = $('#wheel-canvas')[0];
 			canvas.addEventListener("click", wheel.spin, false);
 			wheel.canvasContext = canvas.getContext("2d");
 		},
@@ -180,48 +193,51 @@
 		draw : function() {
 			wheel.clear();
 			wheel.drawWheel();
-			wheel.drawNeedle();
+
+      wheel.drawNeedle();
+      $('#spins').html(winners.names.length);
+
 		},
 
 		clear : function() {
 			wheel.canvasContext.clearRect(0, 0, 1000, 800);
 		},
 
-		drawNeedle : function() {
-			var ctx = wheel.canvasContext,
-                centerX = wheel.centerX,
-                centerY = wheel.centerY,
-                size = wheel.size,
-                i,
-                centerSize = centerX + size,
-                len = wheel.segments.length,
-                winner;
 
-			ctx.lineWidth = 2;
-			ctx.strokeStyle = blackHex;
-			ctx.fillStyle = whiteHex;
+		 drawNeedle : function() {
+		 	var ctx = wheel.canvasContext,
+                 centerX = wheel.centerX,
+                 centerY = wheel.centerY,
+                 size = wheel.size,
+                 i,
+                 centerSize = centerX + size,
+                 len = wheel.segments.length;
+		 	ctx.lineWidth = 2;
+		 	ctx.strokeStyle = blackHex;
+		 	ctx.fillStyle = whiteHex;
 
-			ctx.beginPath();
+		 	ctx.beginPath();
 
-			ctx.moveTo(centerSize - 10, centerY);
-			ctx.lineTo(centerSize + 10, centerY - 10);
-			ctx.lineTo(centerSize + 10, centerY + 10);
-			ctx.closePath();
+		 	ctx.moveTo(centerSize - 10, centerY);
+		 	ctx.lineTo(centerSize + 10, centerY - 10);
+		 	ctx.lineTo(centerSize + 10, centerY + 10);
+		 	ctx.closePath();
 
-			ctx.stroke();
-			ctx.fill();
+		 	ctx.stroke();
+		 	ctx.fill();
 
-			// Which segment is being pointed to?
-			i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
+		 	// Which segment is being pointed to?
+		 	i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
 
-			// Now draw the winning name
-			ctx.textAlign = "left";
-			ctx.textBaseline = "middle";
-			ctx.fillStyle = blackHex;
-			ctx.font = "2em Arial";
-            winner = wheel.segments[i] || 'Choose at least 1 Venue';
-			ctx.fillText(winner, centerSize + 20, centerY);
-		},
+		 	// Now draw the winning name
+		 	ctx.textAlign = "left";
+		 	ctx.textBaseline = "middle";
+		 	ctx.fillStyle = blackHex;
+		 	ctx.font = "1.5em Arial";
+      winner = wheel.segments[i];
+		 	ctx.fillText(winner, centerSize + 20, centerY);
+		 },
+
 
 		drawSegment : function(key, lastAngle, angle) {
 			var ctx = wheel.canvasContext,
@@ -300,14 +316,28 @@
 			ctx.stroke();
 		}
 	};
+
   $(function() {
-    wheel.init();
+    if($('#wheel-canvas').size() > 0) {
+      var contestants2 = $('#wheel-canvas').data('contestants').split('\n');
+      var winners2 = $('#wheel-canvas').data('winners');
+      wheel.init();
 
-		$.each(contestants, function(key, contestant) {
-			wheel.segments.push( contestant );
-		});
+      $.each(contestants2, function(key, contestant) {
+        wheel.segments.push( contestant );
+      });
 
-		wheel.update();
+        $.each(contestants2, function(key, contestant) {
+            contestants.names.push( contestant );
+        });
 
+        $.each(winners2, function(key, winner) {
+            winners.names.push( winner );
+        });
+
+
+
+        wheel.update();
+    }
 	});
 }(jQuery));

@@ -1,11 +1,18 @@
 class Raffle < ActiveRecord::Base
-  validates :title, presence: true
-  validates :num_winners, presence: true
-
   has_many :participations
   has_many :contestants, through: :participations
   accepts_nested_attributes_for :participations
   accepts_nested_attributes_for :contestants
+
+  validates :title, presence: true, uniqueness: true
+  validates :num_winners, presence: true, numericality: { only_integer: true, greater_than: 0}
+
+  # works but causes tests to fail
+  validate do |raffle|
+    raffle.errors.add(:num_winners, "must be less than number of participants") if num_winners > 0 and raffle.participations.size <= num_winners
+  end
+
+
 
   # Takes a string of contestant names, one per line, makes associations
   #"Rob\nAllie\nEthan"
@@ -20,4 +27,15 @@ class Raffle < ActiveRecord::Base
   def contestant_names
     self.contestants.map(&:name).join("\n")
   end
+
+  def pick_winners
+    winners = participations.sample(num_winners)
+    winners.each{|winner| winner.update_attribute :winner, true}
+    return winners
+  end
+  
+  def winners
+   winners = self.participations.select{ |participant| participant.winner }
+   winners.map{ |winner| winner.contestant }
+ end
 end

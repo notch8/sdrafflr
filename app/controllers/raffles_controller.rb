@@ -1,4 +1,5 @@
 require "pry"
+require "uri"
 class RafflesController < ApplicationController
   def index
     @raffles = Raffle.all
@@ -11,6 +12,7 @@ class RafflesController < ApplicationController
   def create
     @raffle = Raffle.new(raffle_params)
     if @raffle.save
+      @raffle.pick_winners
       redirect_to raffle_path(@raffle)
     else
       flash[:notice] = "Oops, something went wrong!"
@@ -20,19 +22,7 @@ class RafflesController < ApplicationController
 
   def show
     @raffle = Raffle.find(params[:id])
-    @winners = @raffle.contestants.sample(@raffle.num_winners)
-    @participations = @raffle.participations
-    @winners.each do |winner|
-      @participations.each do |participation|
-        if participation.contestant_id == winner.id
-          participation.winner = true
-        else
-          participation.winner = false
-        end
-        participation.save
-      end
-    end
-
+    @winners = @raffle.participations.where(winner: true).map {|p| p.contestant.name}.flatten
   end
 
   private

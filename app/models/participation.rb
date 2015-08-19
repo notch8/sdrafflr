@@ -4,4 +4,6 @@ class Participation < ActiveRecord::Base
 
   accepts_nested_attributes_for :raffle
   accepts_nested_attributes_for :contestant
+
+
 end
