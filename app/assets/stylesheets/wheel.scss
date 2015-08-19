@@ -1,41 +1,25 @@
-body {
-  background-color: #F6CECE;
-}
+// body {
+//   background-color: #F6CECE;
+// }
 
-
-#counter {
-  width: 200px;
-  margin-right: none;
-  float: right;
-}
-
-ul {
-  width: 150px;
-  margin: 0px;
-  border: 0px;
-  padding-left: 20px;
-}
-
- .ruby-title a img{
-   height: 200px;
-   margin-left: -60px;
-   margin-top: -40px;
-   margin-right: -55px;
-
+.ruby-title a img{
+  height: 200px;
+  margin-left: -60px;
+  margin-top: -40px;
+  margin-right: -55px;
  }
 
- .main-title {
-   font-size: 60px;
-
+.main-title {
+ font-size: 60px;
  }
 
- body { background: #fff; font-family: sans-serif; color:#666; }
-h1, h2 { font-weight: 100; line-height:2; }
-input[type='checkbox'] + label { padding-left:.5em; }
-label,
-#filterToggle { display:inline-block; }
-#filterToggle { background: #fefefe; box-shadow: 0 1px 2px #efefef; }
-#filterToggle { border-radius: 0 0 3px 3px; cursor: pointer; margin-left: .5em; margin-top:-1px; padding:.5em; }
+// body { background: #fff; color:#666; }
+// h1, h2 { font-weight: 100; line-height:2; }
+// input[type='checkbox'] + label { padding-left:.5em; }
+// label,
+// #filterToggle { display:inline-block; }
+// #filterToggle { background: #fefefe; box-shadow: 0 1px 2px #efefef; }
+// #filterToggle { border-radius: 0 0 3px 3px; cursor: pointer; margin-left: .5em; margin-top:-1px; padding:.5em; }
 
 #counter {
   padding-left: 180px;
@@ -56,6 +40,7 @@ label,
   font-size: 3em;
   text-align: center;
   color: #333;
+  font-family: Orbitron;
 }
 
 #winners {
@@ -76,6 +61,6 @@ label,
 }
 
 #page {
-margin-left: 25px;
-margin-right: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
 }
