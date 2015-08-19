@@ -25,6 +25,10 @@ class RafflesController < ApplicationController
     @winners = @raffle.participations.where(winner: true).map {|p| p.contestant.name}.flatten
   end
 
+  def old
+    @raffles = Raffle.all
+  end
+
   private
     def raffle_params
        params.require(:raffle).permit(:title, :num_winners, :contestant_names)
