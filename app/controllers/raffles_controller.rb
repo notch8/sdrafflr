@@ -1,5 +1,3 @@
-require "pry"
-require "uri"
 class RafflesController < ApplicationController
   def index
     @raffles = Raffle.all
@@ -24,6 +22,7 @@ class RafflesController < ApplicationController
     @raffle = Raffle.find(params[:id])
     @winners = @raffle.participations.where(winner: true).map {|p| p.contestant.name}.flatten
   end
+
 
   private
     def raffle_params

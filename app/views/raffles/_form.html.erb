@@ -1,13 +1,6 @@
-<form role="form">
+
   <%= form_for @raffle do |f| %>
-     <% if @raffle.errors.any? %>
-       <h2>There was a problem saving this record</h2>
-       <ul>
-         <% @raffle.errors.full_messages.each do |error| %>
-           <li><%= error %></li>
-         <% end %>
-       </ul>
-    <% end %>
+    <%= render 'shared/error_messages' %>
     <div class="form-group">
       <%= f.label :title, 'Raffle Name' %>
       <%= f.text_field :title, class: 'form-control' %>
@@ -23,4 +16,3 @@
     </div>
     <%= f.submit "Submit", class: "btn btn-primary" %>
   <% end %>
-</form>
