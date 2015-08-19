@@ -1,33 +1,29 @@
-
-
-
 <div class="container-fluid well well-s" id="page">
-  <div class="row">
-    <div class="ruby-title col-md-12">
-      <a href="/" class="navbar-brand"><img src="https://www.codementor.io/assets/tutorial_icon/ruby-on-rails.png"></a>
-      <div class="main-title"><%= @raffle.title %></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 container-fluid" id="wheel">
-      <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>' data-winners='<%= @winners %>'></canvas>
-      <div id="counter">Spins remaining: <span id="spins"></span></div>
-    </div>
-    <div class="col-md-3 winners" >
-      <h3>Winners</h3>
-      <ul id='winners'></ul>
-    </div>
-  </div>
-
+ <div class="row">
+   <div class="ruby-title col-md-12">
+     <a href="/" class="navbar-brand"><img src="https://www.codementor.io/assets/tutorial_icon/ruby-on-rails.png"></a>
+     <div class="main-title"><%= @raffle.title %></div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-md-8 container-fluid" id="wheel">
+     <canvas id="wheel-canvas" width="1000" height="600" data-contestants='<%= @raffle.contestant_names %>' data-winners='<%= @winners %>'></canvas>
+     <div id="counter">Spins remaining: <span id="spins"></span></div>
+   </div>
+   <div class="col-md-3 winners" >
+     <h3>Winners</h3>
+     <ul id='winners'></ul>
+   </div>
+ </div>
 </div>
 
 <!-- <ul>
-  <% @raffle.contestants.each do |contestant| %>
-    <li><%= contestant.name %></li>
-  <% end %>
+ <% @raffle.contestants.each do |contestant| %>
+   <li><%= contestant.name %></li>
+ <% end %>
 </ul>
 <ul>
-  <% @winners.each do |w| %>
-      <li><%= w %></li>
-  <% end %>
+ <% @winners.each do |w| %>
+     <li><%= w %></li>
+ <% end %>
 </ul> -->
