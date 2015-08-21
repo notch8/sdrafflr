@@ -13,7 +13,13 @@ class TwilioController < ApplicationController
     @message = Message.new(:body => body, :from => from)
     @message.save
 
-    parts = body.split(/(\d+)/)
+    raffle_id = body.gsub(/[^\d]/, '').to_i
+    name = body.gsub(/\d+\s/, '')
+
+    c = Contestant.find_or_create_by(name: name)
+    Participation.create(:contestant_id => c.id, :raffle_id => raffle_id)
+
+
  end
 
 
