@@ -1,14 +1,24 @@
 class RafflesController < ApplicationController
   def index
-    @raffles = Raffle.all
+    @raffle = Raffle.new
   end
 
-  def new
-    @raffle = Raffle.new
+  def edit
+    @raffle = Raffle.find(params[:id])
   end
 
   def create
     @raffle = Raffle.new(raffle_params)
+    if @raffle.save
+      redirect_to edit_raffle_path(@raffle)
+    else
+      flash[:notice] = "Oops, something went wrong!"
+      render 'index'
+    end
+  end
+
+  def update
+    @raffle = Raffle.find(params[:id])
     if @raffle.save
       @raffle.pick_winners
       redirect_to raffle_path(@raffle)

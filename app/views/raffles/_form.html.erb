@@ -2,10 +2,6 @@
   <%= form_for @raffle do |f| %>
     <%= render 'shared/error_messages' %>
     <div class="form-group">
-      <%= f.label :title, 'Raffle Name' %>
-      <%= f.text_field :title, class: 'form-control' %>
-    </div>
-    <div class="form-group">
       <%= f.label :num_winners, 'Number of Winners' %>
       <%= f.text_field :num_winners, class: 'form-control' %>
     </div>
