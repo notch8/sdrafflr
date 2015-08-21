@@ -19,7 +19,7 @@ class RafflesController < ApplicationController
 
   def update
     @raffle = Raffle.find(params[:id])
-    if @raffle.save
+    if @raffle.update_attributes(raffle_params)
       @raffle.pick_winners
       redirect_to raffle_path(@raffle)
     else
