@@ -5,6 +5,7 @@ class RafflesController < ApplicationController
 
   def edit
     @raffle = Raffle.find(params[:id])
+    @participations = Participation.where(raffle_id: @raffle.id)
   end
 
   def create
