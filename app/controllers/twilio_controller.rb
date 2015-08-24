@@ -19,7 +19,7 @@ class TwilioController < ApplicationController
     c = Contestant.find_or_create_by(name: name)
     Participation.create(:contestant_id => c.id, :raffle_id => raffle_id)
 
-
+    head :success
 
  end
 
