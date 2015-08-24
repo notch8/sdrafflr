@@ -1,0 +1,47 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require bootstrap-sprockets
+//= require wheel
+//= require_tree .
+
+// $(function () {
+//   if ($('#participants').length > 0) {
+//     setTimeout(updateParticipants, 3000);
+//   }
+// });
+//
+// function updateParticipants() {
+//   $.getScript('/get_participants/');
+//   setTimeout(updateComments, 3000);
+// }
+//
+$(function() {
+    $(document).ready(function() {
+      id = $('#participants').data('id');
+      setInterval(function() {
+        jQuery.ajax({
+          url: "/raffles/"+id+"/edit.json",
+          type: "GET",
+          dataType: "json",
+          success: function(data, textStatus, jqXHR) {
+            var existingParticipants = $('#participants').val().split('\n');
+            var participants = $.unique(data.concat(existingParticipants));
+            $('#participants').val(participants.join("\n"));
+          }
+        });
+      }, 5000); // In every 5 seconds
+    });
+  });
