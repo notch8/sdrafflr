@@ -1,0 +1,28 @@
+<div class="container well well-sm">
+  <div class="heading-winners">
+    <h1>Previous Winners</h1>
+  </div>
+  <% if @raffles === nil %>
+    <%= flash[:alert] = "There are no raffles in the database!" %>
+  <% else %>
+    <% @raffles.each_slice(1) do |raffles| %>
+    <div class="row fullpage-row">
+      <% raffles.each do |raffle| %>
+      <div class="winner-card col-md-4">
+        <h2><%= raffle.title %></h2>
+        <h4><%= raffle.created_at.strftime("%d %b. %Y") %></h4>
+          <% if raffle.winners %>
+            <ol>
+              <% raffle.winners.each do |winner|%>
+              <li>
+                <%= winner.name %>
+              </li>
+              <% end %>
+            </ol>
+          <% end %>
+      </div>
+      <% end %>
+    <% end %>
+    </div>
+  <% end %>
+</div>
