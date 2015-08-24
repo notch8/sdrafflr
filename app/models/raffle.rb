@@ -5,7 +5,7 @@ class Raffle < ActiveRecord::Base
   accepts_nested_attributes_for :contestants
 
   validates :title, presence: true, uniqueness: true
-  # validates :num_winners, presence: true, numericality: { only_integer: true, greater_than: 0}
+  validates :num_winners, presence: true, numericality: { only_integer: true, greater_than: 0}
 
   # works but causes tests to fail
   # validate do |raffle|

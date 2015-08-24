@@ -2,8 +2,9 @@ require 'faker'
 
 
 FactoryGirl.define do
-  factory :participation do |f|
-    f.contestant_id 1
-    f.raffle_id 1
+  factory :participation do
+    contestant_id 1
+    raffle_id 1
+    winner true
   end
 end

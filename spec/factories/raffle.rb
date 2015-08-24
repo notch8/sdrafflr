@@ -2,8 +2,8 @@ require 'faker'
 
 
 FactoryGirl.define do
-  factory :raffle do |f|
-    f.title { Faker::App.name }
-    f.num_winners { Faker::Number.between(1) }
+  factory :raffle do
+    title { Faker::App.name }
+    num_winners { [1,2,3,4,5].sample }
   end
 end

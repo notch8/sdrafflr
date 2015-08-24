@@ -16,5 +16,4 @@ describe Contestant, 'validation' do
 
   it { should have_many(:raffles) }
 
-
 end
