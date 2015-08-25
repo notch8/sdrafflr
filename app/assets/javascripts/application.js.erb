@@ -13,35 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery-readyselector
 //= require bootstrap-sprockets
 //= require wheel
 //= require_tree .
-
-// $(function () {
-//   if ($('#participants').length > 0) {
-//     setTimeout(updateParticipants, 3000);
-//   }
-// });
-//
-// function updateParticipants() {
-//   $.getScript('/get_participants/');
-//   setTimeout(updateComments, 3000);
-// }
-//
-$(function() {
-    $(document).ready(function() {
-      id = $('#participants').data('id');
-      setInterval(function() {
-        jQuery.ajax({
-          url: "/raffles/"+id+"/edit.json",
-          type: "GET",
-          dataType: "json",
-          success: function(data, textStatus, jqXHR) {
-            var existingParticipants = $('#participants').val().split('\n');
-            var participants = $.unique(data.concat(existingParticipants));
-            $('#participants').val(participants.join("\n"));
-          }
-        });
-      }, 5000); // In every 5 seconds
-    });
-  });

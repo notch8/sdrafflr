@@ -1,0 +1,15 @@
+$(".raffles.edit").ready(function() {
+  id = $('#participants').data('id');
+  setInterval(function() {
+    jQuery.ajax({
+      url: "/raffles/"+id+"/edit.json",
+      type: "GET",
+      dataType: "json",
+      success: function(data, textStatus, jqXHR) {
+        var existingParticipants = $('#participants').val().split('\n');
+        var participants = $.unique(data.concat(existingParticipants));
+        $('#participants').val(participants.join("\n"));
+      }
+    });
+  }, 5000); // In every 5 seconds
+});
