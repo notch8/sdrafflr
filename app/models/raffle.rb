@@ -21,7 +21,6 @@ class Raffle < ActiveRecord::Base
     names.each do |name|
       c = Contestant.find_or_initialize_by(name: name)
       Participation.find_or_create_by(:contestant_id => c.id, :raffle_id => self.id)
-
       # self.contestants << c
     end
   end
