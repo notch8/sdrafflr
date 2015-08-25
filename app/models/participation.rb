@@ -6,6 +6,7 @@ class Participation < ActiveRecord::Base
   accepts_nested_attributes_for :contestant
 
   validates :raffle_id, uniqueness: { scope: :contestant_id }
+  validates :from, uniqueness: { scope: :raffle_id }
 
   # validates :raffle_id, presence: true, uniqueness: true
   # validates :contestant_id, presence: true, uniqueness: true
