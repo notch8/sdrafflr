@@ -5,14 +5,6 @@ class TwilioController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  def voice
-  	response = Twilio::TwiML::Response.new do |r|
-  	  r.Say 'Hey there. Congrats on integrating Twilio into your Rails 4 app.', :voice => 'alice'
-         r.Play 'http://linode.rabasa.com/cantina.mp3'
-  	end
-  	render_twiml response
-  end
-
  def message
     body = params[:Body]
     from = params[:From]
@@ -29,21 +21,17 @@ class TwilioController < ApplicationController
     c = Contestant.find_or_create_by(name: name)
     p = Participation.new(:contestant_id => c.id, :raffle_id => raffle_id, :from => from)
 
-
     if p.save
       response = Twilio::TwiML::Response.new do |r|
         r.Message "You have successfully entered the raffle. Good luck!"
       end
     else
       response = Twilio::TwiML::Response.new do |r|
-        r.Message "Something went wrong."
+        r.Message "Sorry, only one entry per phone number."
       end
     end
 
     render_twiml response
-
-    head :success
-
  end
 
 
