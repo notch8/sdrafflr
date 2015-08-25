@@ -17,7 +17,7 @@ class TwilioController < ApplicationController
     name = body.gsub(/\d+\s/, '')
 
     c = Contestant.find_or_create_by(name: name)
-    Participation.create(:contestant_id => c.id, :raffle_id => raffle_id)
+    Participation.create(:contestant_id => c.id, :raffle_id => raffle_id, :from => from)
 
     head :success
 
