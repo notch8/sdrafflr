@@ -6,10 +6,10 @@ class Raffle < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true
   # validates :num_winners, presence: true, numericality: { only_integer: true, greater_than: 0}
-
-  # works but causes tests to fail
+  #
+  # # works but causes tests to fail
   # validate do |raffle|
-  #   raffle.errors.add(:num_winners, "must be less than number of participants") if num_winners > 0 and raffle.participations.size <= num_winners
+  #   raffle.errors.add(:num_winners, "must be less than number of participants") if num_winners > 0 && raffle.participations.size <= num_winners
   # end
 
 
@@ -23,9 +23,6 @@ class Raffle < ActiveRecord::Base
         c = Contestant.create(name: name)
         self.contestants << c
       end
-      # c = Contestant.find_or_initialize_by(name: name)
-      # Participation.find_or_create_by(:contestant_id => c.id, :raffle_id => self.id)
-      # self.contestants << c
     end
   end
 
