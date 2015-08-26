@@ -42,3 +42,91 @@ h1 {
       margin-bottom: 0px;
     }
 }
+
+@function posOrNeg(){
+  @return random() * 2 - 1;
+}
+
+$fwSize: 5;
+$totalFireworks: 10;
+$totalPieces: 40;
+$time: 5;
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: rgba(0,0,0,0);
+  overflow: hidden;
+}
+
+.wrap {
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.firework {
+  position: absolute;
+  z-index: 10;
+  top: 105%;
+  left: 50%;
+  backface-visibilty: hidden;
+  display: none;
+}
+
+.c {
+  background: white;
+  height: $fwSize+2px;
+  width: $fwSize+2px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+@for $i from 1 through $totalFireworks {
+  $x: random(900) * posOrNeg()+px;
+  $y: -(random(30) + 60)+vh;
+
+  @keyframes shoot#{$i}{
+    0% {
+      transform: translate3d(0,0,0) scale(.1);
+    }
+    95% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d($x, $y, 0) scale(1);
+      opacity: 0;
+    }
+  }
+  .firework:nth-child(#{$i}){
+    animation: shoot#{$i} $time+s infinite;
+    animation-delay: ($time/$totalFireworks * $i)+s;
+  }
+
+  @for $x from 1 through $totalPieces {
+    .firework:nth-child(#{$i}) .c {
+      $hue: (360/$totalFireworks) * $i;
+      background: hsl($hue, 100%, 50%);
+      box-shadow: 0 0 3px 0px hsla($hue, 100%, 50%, .8);
+      &:nth-child(#{$x}){
+        animation-delay: ($time/$totalFireworks * $i)+s;
+      }
+    }
+  }
+}
+
+@for $x from 1 through $totalPieces {
+  @keyframes explode#{$x} {
+    60% {
+      transform: translate3d(0,0,0) scale(1);
+    }
+    100% {
+      transform: translate3d(random(150) * posOrNeg()+px, random(150) * posOrNeg()+px, 0) scale(.1);
+    }
+  }
+  .c:nth-child(#{$x}) {
+    animation: explode#{$x} $time+s infinite linear;
+  }
+}

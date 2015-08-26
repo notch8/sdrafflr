@@ -129,6 +129,7 @@
             wheel.progress = 0;
             wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
             } else {
+              $(".firework").show();
               $('#spins').html("0");
               wheel.timerHandle = 0;
             }
