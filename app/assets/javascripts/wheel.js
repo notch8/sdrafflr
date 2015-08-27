@@ -129,6 +129,17 @@
             wheel.progress = 0;
             wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
             } else {
+  
+
+              soundManager.createSound({
+                id: 'theme',
+                url: '/audio/theme.mp3',
+                autoLoad: true,
+                autoPlay: true,
+                volume: 50
+              });
+
+              $('.firework').show();
               $('#spins').html("0");
               wheel.timerHandle = 0;
               function blinker() {

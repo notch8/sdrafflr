@@ -32,6 +32,8 @@ gem 'shoulda-matchers'
 gem 'pry'
 
 gem 'twilio-ruby'
+
+gem 'soundmanager2-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
