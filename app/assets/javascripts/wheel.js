@@ -129,9 +129,25 @@
             wheel.progress = 0;
             wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
             } else {
-              $(".firework").show();
+  
+
+              soundManager.createSound({
+                id: 'theme',
+                url: '/audio/theme.mp3',
+                autoLoad: true,
+                autoPlay: true,
+                volume: 50
+              });
+
+              $('.firework').show();
               $('#spins').html("0");
               wheel.timerHandle = 0;
+              function blinker() {
+                  $('.blink_me').fadeOut(1500);
+                  $('.blink_me').fadeIn(1500);
+              }
+
+              setInterval(blinker, 1000); //Runs every second
             }
           });
         if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }

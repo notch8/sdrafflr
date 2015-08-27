@@ -19,8 +19,9 @@ class Raffle < ActiveRecord::Base
   def contestant_names=(value)
     names = value.split("\n").map {|item| item.strip}
     names.each do |name|
+      name.strip!
       if !self.contestants.exists?(name: name)
-        c = Contestant.create(name: name)
+        c = Contestant.find_or_create_by(name: name)
         self.contestants << c
       end
     end

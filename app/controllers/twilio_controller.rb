@@ -18,7 +18,7 @@ class TwilioController < ApplicationController
 
     raffle_title = Raffle.find_by(id: raffle_id).title
 
-    c = Contestant.find_or_create_by(name: name)
+    c = Contestant.find_or_create_by(name: name.strip)
     p = Participation.new(:contestant_id => c.id, :raffle_id => raffle_id, :from => from)
 
     if p.save
