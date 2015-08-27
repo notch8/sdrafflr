@@ -58,6 +58,7 @@
 
 		spinStart : 0,
 
+
 		frames : 0,
     progress : 0,
 
@@ -82,6 +83,14 @@
 			wheel.frames++;
 			wheel.draw();
 
+      soundManager.createSound({
+        id: 'tick',
+        url: '/audio/spoke.mp3',
+        autoLoad: true,
+        autoPlay: true,
+        volume: 30
+      })
+
 			if (duration < wheel.upTime) {
 				wheel.progress = duration / wheel.upTime;
 				wheel.angleDelta = wheel.maxSpeed
@@ -98,6 +107,7 @@
                 }
                 if (wheel.progress >= 1 && jQuery.inArray(winner, winners.names) !== -1){
                     finished = true;
+                    soundManager.stop('tick');
 
                     //remove winner from winners array
                     console.log(winner);
@@ -128,8 +138,9 @@
             wheel.frames = 0;
             wheel.progress = 0;
             wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
+            soundManager.play('tick');
             } else {
-  
+
 
               soundManager.createSound({
                 id: 'theme',
@@ -159,6 +170,7 @@
 			$("#counter").html( Math.round(rpm) + " RPM" );
 			 */
 		},
+
 
 
 		init : function(optionList) {
@@ -205,6 +217,7 @@
 			wheel.seg_color = seg_color;
 
 			wheel.draw();
+
 		},
 
 		draw : function() {
@@ -245,6 +258,7 @@
 
 		 	// Which segment is being pointed to?
 		 	i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
+
 
 		 	// Now draw the winning name
 		 	ctx.textAlign = "left";
